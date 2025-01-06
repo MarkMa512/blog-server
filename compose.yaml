@@ -4,7 +4,7 @@ services:
     image: 'postgres:latest'
     environment:
       - 'POSTGRES_DB=blog_server'
-      - 'POSTGRES_PASSWORD=user'
-      - 'POSTGRES_USER=password'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=user'
     ports:
       - '5432:5432'
