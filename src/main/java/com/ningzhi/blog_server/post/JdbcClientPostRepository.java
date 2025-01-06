@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JdbcClientPostRepository {
@@ -17,9 +18,16 @@ public class JdbcClientPostRepository {
     }
 
     public List<Post> findAll() {
-        return jdbcClient.sql("SELECT * FROM Post")
+        return jdbcClient.sql("SELECT * FROM post")
                 .query(Post.class)
                 .list();
+    }
+
+    public Optional<Post> findById(Long id){
+        return jdbcClient.sql("SELECT id,title, content, author, created_at, updated_at, version FROM post WHERE id=:id")
+                .param("id",id)
+                .query(Post.class)
+                .optional();
     }
 
 }
