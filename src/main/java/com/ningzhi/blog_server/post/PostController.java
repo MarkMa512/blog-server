@@ -1,6 +1,7 @@
 package com.ningzhi.blog_server.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -32,9 +33,10 @@ public class PostController {
     }
 
     @PostMapping("")
-    public Post create(@RequestBody Post post) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody Post post) {
         LocalDateTime now = LocalDateTime.now();
-        return postRepository.save(new Post(
+        postRepository.save(new Post(
                 post.id(),
                 post.title(),
                 post.content(),
@@ -43,5 +45,37 @@ public class PostController {
                 post.updatedAt() != null ? post.updatedAt():now,
                 post.version()
         ));
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void update(@PathVariable Long id, @RequestBody Post post) {
+        if (post.title()==null || post.content()==null || post.author()==null){
+            throw new IllegalArgumentException("Title, content, and author cannot be null");
+        }
+        Optional<Post> existingPost = postRepository.findById(id);
+        if (existingPost.isEmpty()){
+            throw new PostNotFoundException();
+        }
+        Post updatedPost = new Post(
+                id,
+                post.title(),
+                post.content(),
+                post.author(),
+                existingPost.get().createdAt(), // preserve the createAt time
+                LocalDateTime.now(),
+                existingPost.get().version()
+        );
+        postRepository.save(updatedPost);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable Long id) {
+        Optional<Post> postOptional = postRepository.findById(id);
+        if (postOptional.isEmpty()){
+            throw new PostNotFoundException();
+        }
+        postRepository.delete(postOptional.get());
     }
 }
