@@ -1,11 +1,9 @@
 package com.ningzhi.blog_server.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,5 +29,19 @@ public class PostController {
             throw new PostNotFoundException();
         }
         return post;
+    }
+
+    @PostMapping("")
+    public Post create(@RequestBody Post post) {
+        LocalDateTime now = LocalDateTime.now();
+        return postRepository.save(new Post(
+                post.id(),
+                post.title(),
+                post.content(),
+                post.author(),
+                post.createdAt() != null ? post.createdAt():now,
+                post.updatedAt() != null ? post.updatedAt():now,
+                post.version()
+        ));
     }
 }

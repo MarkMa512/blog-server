@@ -26,7 +26,8 @@ public record Post(
         Integer version
 ) {
     public Post {
-        if(createdAt.isAfter(updatedAt)) {
+        // validate only if both fields are provided
+        if(createdAt != null && updatedAt != null && createdAt.isAfter(updatedAt)) {
             throw new IllegalArgumentException("createdAt must be before updatedAt");
         }
     }

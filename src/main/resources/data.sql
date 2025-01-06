@@ -1,3 +1,4 @@
+-- Testing Data
 INSERT INTO post (title, content, author, created_at, updated_at, version) VALUES
 ('Introduction to Spring Boot', 'This post explains the basics of Spring Boot and how to get started.', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 ('Understanding JPA and Hibernate', 'A deep dive into JPA and Hibernate with practical examples.', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
