@@ -1,0 +1,29 @@
+### Find All Posts
+GET http://localhost:8080/api/posts
+
+### Find Single Post by ID
+GET http://localhost:8080/api/posts/1
+
+### Create New Post
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "title": "Exploring Spring Boot",
+  "content": "Spring Boot simplifies application development with Spring by offering pre-configured templates and dependencies.",
+  "author": 1
+}
+
+### Update an Existing Post
+PUT http://localhost:8080/api/posts/9
+Content-Type: application/json
+
+{
+  "title": "Exploring Spring Boot II",
+  "content": "This is an updated content again.",
+  "author": 1
+}
+
+
+### Delete an Exisiting Post
+DELETE http://localhost:8080/api/posts/9
