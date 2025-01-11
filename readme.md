@@ -1,6 +1,6 @@
 # Blog Server with Spring Boot 
 
-![Java CI with Maven](https://github.com/MarkMa512/blog-server/actions/actions/workflows/maven.yml/badge.svg)
+![Java CI with Maven](https://github.com/MarkMa512/blog-server/actions/workflows/maven.yml/badge.svg)
 
 ## Built with
 1. Spring Boot
