@@ -8,19 +8,34 @@
 ## Key Features
 
 ### REST API
-- This project aims to implement a set of RESTful API for blog post management. 
-- Supporting essential CRUD Operations
-  - Create: Add new Blog Posts
+- This project aims to implement a set of **RESTful API** for blog post management. 
+- Supporting essential **CRUD Operations**
+  - Create: Add new blog posts
+  ```
+  POST http://localhost:8080/api/posts
+  ```
   - Read: Fetch individual/all blog post
+  ```
+  GET http://localhost:8080/api/posts
+  ```
   - Update: Modify existing blog posts
+  ```
+  PUT http://localhost:8080/api/posts/{id}
+  ```
   - Delete: Remove blog posts from the database
-- Follows the best practice for REST API design, including 
-  - Proper use of HTTP Method
-  - Status code 
+  ```
+  DELETE http://localhost:8080/api/posts/{id}
+  ```
+  
+- Follows the best practice for REST API design, including proper use of 
+  - HTTP Method
+  - HTTP Status code
   - Request and Response Structure
 
+For more details, please refer to [api/post.http](api/post.http)
+
 ### MVL Models: Model View Controller
-- **Packaged by feature**: This project follows the "package by feature" convention for better encapsulation, 
+- **Packaged by feature**: This project follows this convention for better encapsulation, 
 maintainability and clarity. 
   - Each feature (eg. post) is a package that contains its own domain model, controller, repository, and relevant
   exceptions. 
@@ -38,12 +53,13 @@ post/
 - Emphasizes **Test-Driven-Development(TDD)** for robust and reliable code.
 
 #### Unit Test
-- Unit Tests for PostController
+- Unit Tests for `PostController`: [`PostControllerTest.java`](src/test/java/com/ningzhi/blog_server/post/PostControllerTest.java)
     - Validates the behavior of the PostController in isolation.
     - Ensures the correctness of the REST endpoints.
 #### Integration Test 
-- Test the interaction between PostController, PostRepository and the Database. 
-- Verifies the complete workflow, from API calls to database operations.
+- Integration Test for `PostController`: 
+  - Test the interaction between PostController, PostRepository and the Database. 
+  - Verifies the complete workflow, from API calls to database operations.
 
 #### Tools Used
 - **JUnit**: For writing and running tests.
