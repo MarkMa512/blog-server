@@ -34,7 +34,7 @@
 
 For more details, please refer to [api/post.http](api/post.http)
 
-### MVL Models: Model View Controller
+### MVC Models: Model View Controller
 - **Packaged by feature**: This project follows this convention for better encapsulation, 
 maintainability and clarity. 
   - Each feature (eg. post) is a package that contains its own domain model, controller, repository, and relevant
