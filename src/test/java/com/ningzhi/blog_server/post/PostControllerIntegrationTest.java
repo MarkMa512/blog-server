@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -39,18 +40,58 @@ class PostControllerIntegrationTest {
     }
 
     @Test
-    void shouldFindPostById() {
+    void shouldFindOnePostById() {
+        Post post = restClient.get()
+            .uri("api/posts/1")
+            .retrieve()
+            .body(Post.class);
+
+        assertNotNull(post, "The response should not be null");
+        assertAll(
+                ()-> assertEquals(1,post.id()),
+                ()-> assertEquals("Introduction to Spring Boot", post.title()),
+                ()-> assertEquals("This post explains the basics of Spring Boot and how to get started.", post.content()),
+                ()-> assertEquals(1, post.author()),
+                ()-> assertEquals(1, post.version())
+        );
     }
 
     @Test
     void shouldCreatePost() {
+        Post post = new Post(
+                null, "Integration Test", "This is a post created in integration test. ", 1L,
+                null, null, null);
+
+        ResponseEntity<Void> response = restClient.post()
+                .uri("api/posts")
+                .body(post)
+                .retrieve()
+                .toBodilessEntity();
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test
     void shouldUpdateExistingPost() {
+        Post post = restClient.get().uri("api/posts/2").retrieve().body(Post.class);
+        assertNotNull(post, "The response should not be null");
+
+        ResponseEntity<Void> updatedRun = restClient.put()
+                .uri("api/posts/2")
+                .body(post)
+                .retrieve()
+                .toBodilessEntity();
+
+        assertEquals(HttpStatus.ACCEPTED, updatedRun.getStatusCode());
     }
 
     @Test
     void shouldDeleteExistingPost() {
+        ResponseEntity<Void> post = restClient.delete()
+                .uri("api/posts/5")
+                .retrieve()
+                .toBodilessEntity();
+
+        assertEquals(HttpStatus.OK, post.getStatusCode());
     }
 }

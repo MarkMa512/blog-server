@@ -56,9 +56,10 @@ post/
 - Unit Tests for `PostController`: [`PostControllerTest.java`](src/test/java/com/ningzhi/blog_server/post/PostControllerTest.java)
     - Validates the behavior of the PostController in isolation.
     - Ensures the correctness of the REST endpoints.
-#### Integration Test 
-- Integration Test for `PostController`: 
+#### Integration Test
+- Integration Test for `PostController`: [`PostControllerIntegrationTest.java`](src/test/java/com/ningzhi/blog_server/post/PostControllerIntegrationTest.java)
   - Test the interaction between PostController, PostRepository and the Database. 
+  - Utilizing In-memory H2 database for realistic testing. 
   - Verifies the complete workflow, from API calls to database operations.
 
 #### Tools Used
