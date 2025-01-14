@@ -15,8 +15,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "spring.profiles.active=test")
+// must have the properties been set:
+/* PostControllerIntegrationTest.shouldCreatePost » IllegalState ApplicationContext failure threshold (1) exceeded:
+ * skipping repeated attempt to load context for [WebMergedContextConfiguration@7df5549e testClass =
+ * com.ningzhi.blog_server.post.PostControllerIntegrationTest
+ */
+//@ActiveProfiles("test")
 class PostControllerIntegrationTest {
 
     @LocalServerPort

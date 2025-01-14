@@ -7,6 +7,7 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(PostController.class)
+//@SpringBootTest(properties = "spring.profiles.active=test"):
+// Not to be enabled: found multiple declarations of @BootstrapWith for test class
 class PostControllerTest {
 
     @Autowired
