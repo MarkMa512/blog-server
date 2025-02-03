@@ -13,6 +13,8 @@
 - This project aims to implement a set of **RESTful API** for blog post management. 
 - Supporting essential **CRUD Operations**
   - Create: Add new blog posts
+  
+  **Localhost Testing:** 
   ```
   POST http://localhost:8080/api/posts
   ```
@@ -28,7 +30,10 @@
   ```
   DELETE http://localhost:8080/api/posts/{id}
   ```
-  
+
+The application is currently deployed on Heroku at: https://blogserver-3d7e486c7e82.herokuapp.com/
+(for cost and security purposes it is usually placed under maintenance mode).
+
 - Follows the best practice for REST API design, including proper use of 
   - HTTP Method
   - HTTP Status code
@@ -78,11 +83,12 @@ deployment workflows. Key features include:
 - Executes build and test steps using Maven, ensuring the codebase remains functional and maintainable.
 - Uploads build artifacts (JAR files) for further deployment stages.
 
-#### Continuous Deployment (CD): -- Pending Now --
+#### Continuous Deployment (CD): 
+- It is currently successfully deployed on Heroku at: https://blogserver-3d7e486c7e82.herokuapp.com/ 
+(for cost and security purposes it is usually placed under maintenance mode). 
 - Supports integration with deployment platforms like AWS Elastic Beanstalk, enabling automated deployments of the 
 built application.
 - Containerized deployment with Docker can also be incorporated for platform independence.
-
 This setup ensures rapid feedback on code changes and streamlines the deployment process, promoting a seamless 
 development lifecycle.
 
